@@ -1,0 +1,12 @@
+name: "JSON to CSV Converter"
+description: "Converts a JSON file to CSV format and stores it in the specified location"
+inputs:
+  input-file:
+    description: "The JSON file to be converted"
+    required: true
+  output-file:
+    description: "The path where the CSV file will be saved"
+    required: true
+runs:
+  using: "node16"
+  main: "index.js"
