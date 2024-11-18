@@ -1,0 +1,18 @@
+* @omfdevops/Maintainers
+
+## DevOps Shared
+## Directories
+/bin @omfdevops/Admins @omfdevops/Maintainers
+/ca-certificates @omfdevops/Admins @omfdevops/Maintainers
+/helm @omfdevops/Admins @omfdevops/Maintainers
+/scripts @omfdevops/Admins @omfdevops/Maintainers
+/terraform @omfdevops/Admins @omfdevops/Maintainers
+## Files
+.gitignore @omfdevops/Admins @omfdevops/Maintainers
+Dockerfile @omfdevops/Admins @omfdevops/Maintainers
+Jenkinsfile @omfdevops/Admins @omfdevops/Maintainers
+README.md @omfdevops/Admins @omfdevops/Maintainers
+SECURITY.md @omfdevops/Admins @omfdevops/Maintainers
+environments.json @omfdevops/Admins @omfdevops/Maintainers
+## DevOps Only
+CODEOWNERS @omfdevops/Admins

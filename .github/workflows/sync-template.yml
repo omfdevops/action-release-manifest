@@ -1,0 +1,78 @@
+name: "sync-template"
+on:
+  create:
+
+env:
+  GITHUB_USER_EMAIL: "actions@github.com"
+  GITHUB_USER_NAME: "github-actions[bot]"
+  TEMPLATE_REPOSITORY: "github-private-repository-template"
+  TEMPLATE_BRANCH: "main"
+
+jobs:
+  sync:
+    if: github.event.ref_type == 'branch' && contains(github.ref, 'sync/')
+
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref }}
+
+      - uses: actions/create-github-app-token@v1
+        id: app-token
+        with:
+          app-id: ${{ secrets.ENT_GHAPP_ID }}
+          private-key: ${{ secrets.ENT_GHAPP_PEM }}
+          owner: ${{ github.repository_owner }}
+
+      - name: Checkout Template Repository
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          token: ${{ steps.app-token.outputs.token }}
+          repository: "${{ github.repository_owner }}/${{ env.TEMPLATE_REPOSITORY }}"
+          ref: ${{ env.TEMPLATE_BRANCH }}
+          path: "./${{ env.TEMPLATE_REPOSITORY }}"
+          fetch-depth: 0
+
+      - name: Sync remote to current branch
+        id: sync
+        run: |
+          git config user.email ${{ env.GITHUB_USER_EMAIL }}
+          git config user.name ${{ env.GITHUB_USER_NAME }}
+
+          echo "NO_CHANGES=false" >> $GITHUB_ENV
+
+          if ! git fetch ./${{ env.TEMPLATE_REPOSITORY }} ${{ env.TEMPLATE_BRANCH }}; then
+            echo "Error! Failed to fetch changes" >&2
+            exit 1
+          fi
+
+          if ! git merge FETCH_HEAD -X theirs --allow-unrelated-histories; then
+            echo "Error! Merge conflicts or other merge issues" >&2
+            exit 1
+          fi
+
+          if [ -z "$(git diff origin/${{ github.ref_name }}...HEAD)" ]; then
+            echo "There are no changes, so push and PR should be skipped!"
+            echo "NO_CHANGES=true" >> $GITHUB_ENV
+            exit 0
+          fi
+
+          if ! git push origin ${{ github.ref }}; then
+            echo "Error! Failed to push changes" >&2
+            exit 1
+          fi
+
+      - name: Open PR
+        if: env.NO_CHANGES != 'true'
+        run: |
+          gh pr create -B ${{ github.event.repository.default_branch }} -H ${{ github.ref }} --title 'Sync ${{ github.event.repository.default_branch }} into ${{ github.ref }}' --body 'Sync updates from the template repository.'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

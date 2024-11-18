@@ -1,0 +1,30 @@
+#!/usr/bin/env groovy
+
+
+# This is a template file, please use the snippets in here in your Jenkinsfile pipeline
+
+pipeline {
+    stages {
+        stage('Build') {
+            parallel {
+                stage ('Run git-secrets') {
+                    agent {
+                         docker {
+                             image 'moduscreate/alpine-git-secrets:1.1'
+                             args "-it -entrypoint="
+                        }
+                    }
+                    steps {
+                        catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                            sh '''
+                                git secrets --install -f
+                                git secrets --register-aws
+                                git secrets --scan
+                               '''
+                        }
+                    }
+                }
+             }
+         }
+    }
+}
