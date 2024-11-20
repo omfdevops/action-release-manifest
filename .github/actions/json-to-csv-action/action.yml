@@ -10,22 +10,26 @@ inputs:
 runs:
   using: "composite"
   steps:
-    # Step 1: Set up Node.js environment
-    - name: Set up Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: '16'
+     name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
 
-    # Step 2: Install dependencies
-    - name: Install dependencies
-      run: npm install
-      working-directory: .github/actions/json-to-csv-action # Adjust this path as needed
+      - name: Install dependencies
+        run: npm install
+        working-directory: .github/actions/json-to-csv-action # Adjust this path as needed
 
-  # Step 3: Run the main script
-    - name: Run JSON to CSV script
-      run: node index.js
-      shell: bash
-      working-directory: .github/actions/json-to-csv-action # Adjust this path as needed
-      with:
+      - name: Run script
+        run: node ./.github/actions/json-to-csv-action/index.js
+        with:
         input-file: ${{ inputs.input-file }}
         output-file: ${{ inputs.output-file }}
+
+  # Step 3: Run the main script
+    #- name: Run JSON to CSV script
+    #  run: node index.js
+    #  shell: bash
+    #  working-directory: .github/actions/json-to-csv-action # Adjust this path as needed
+    #  with:
+    #    input-file: ${{ inputs.input-file }}
+    #    output-file: ${{ inputs.output-file }}
