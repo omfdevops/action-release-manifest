@@ -16,10 +16,12 @@ runs:
           node-version: '16'
 
       - name: Install dependencies
+        shell: bash
         run: npm install
         working-directory: .github/actions/json-to-csv-action # Adjust this path as needed
 
       - name: Run script
+        shell: bash
         run: node ./.github/actions/json-to-csv-action/index.js
         with:
         input-file: ${{ inputs.input-file }}
