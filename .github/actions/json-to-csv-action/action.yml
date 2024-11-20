@@ -26,6 +26,18 @@ runs:
           input-file: ${{ inputs.input-file }}
           output-file: ${{ inputs.output-file }}
         run: node ./.github/actions/json-to-csv-action/index.js
+
+      - name: Commit and Push CSV
+        if: success()
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          pwd
+          #git add ./data.csv
+          #git commit -m "Add converted CSV file from JSON"
+          #git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
                
 
   # Step 3: Run the main script
