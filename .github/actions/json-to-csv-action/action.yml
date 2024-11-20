@@ -28,6 +28,7 @@ runs:
         run: node ./.github/actions/json-to-csv-action/index.js
 
       - name: Commit and Push CSV
+        shell: bash
         if: success()
         run: |
           #git config --global user.name "github-actions[bot]"
