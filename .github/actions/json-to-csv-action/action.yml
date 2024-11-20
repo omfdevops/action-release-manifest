@@ -24,6 +24,7 @@ runs:
   # Step 3: Run the main script
     - name: Run JSON to CSV script
       run: node index.js
+      shell: bash
       working-directory: .github/actions/json-to-csv-action # Adjust this path as needed
       with:
         input-file: ${{ inputs.input-file }}
