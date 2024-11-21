@@ -33,13 +33,12 @@ runs:
         run: |
           #git config --global user.name "github-actions[bot]"
           #git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          realpath data.csv
-          pwd
-          #git add ./data.csv
-          #git commit -m "Add converted CSV file from JSON"
-          #git push
-        #env:
-          #GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          mv data.csv ..
+          git add ./data.csv
+          git commit -m "Add converted CSV file from JSON"
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
                
 
   # Step 3: Run the main script
