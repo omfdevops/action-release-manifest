@@ -35,7 +35,7 @@ runs:
         shell: bash
         env:
          GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
-         OUTPUT_FILE: ${{ inputs.output-file }}
+         OUTPUT_FILE: "data.csv"
         if: success()
         run: |
           echo "The output file is: $OUTPUT_FILE"
