@@ -42,7 +42,7 @@ runs:
           cat $OUTPUT_FILE
           #git config --global user.name "github-actions[bot]"
           #git config --global user.email "github-actions[bot]@users.noreply.github.com"
-   
+          realpath $OUTPUT_FILE
           git status
           #git add .
           #git commit -m "Add converted CSV file from JSON"
