@@ -45,9 +45,9 @@ runs:
           realpath $OUTPUT_FILE
           pwd
           git status
-          #git add .
-          #git commit -m "Add converted CSV file from JSON"
-          #git push
+          git add $OUTPUT_FILE
+          git commit -m "Add converted CSV file from JSON"
+          git push
        
                
 
