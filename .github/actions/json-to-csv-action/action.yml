@@ -35,9 +35,10 @@ runs:
         shell: bash
         if: success()
         run: |
+          echo ${{ inputs.output-file }}
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          
+   
           git status
           git add ${{ inputs.output-file }}
           git commit -m "Add converted CSV file from JSON"
