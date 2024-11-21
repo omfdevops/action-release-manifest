@@ -1,10 +1,10 @@
 name: "JSON to CSV Converter"
 description: "Converts a JSON file to CSV format and stores it in the specified location"
 inputs:
-  input-file:
+  input_file:
     description: "The JSON file to be converted"
     required: true
-  output-file:
+  output_file:
     description: "The path where the CSV file will be saved"
     required: true
   GITHUB_TOKEN:
@@ -27,15 +27,15 @@ runs:
       - name: Run script
         shell: bash
         env: 
-          input-file: ${{ inputs.input-file }}
-          output-file: ${{ inputs.output-file }}
+          input-file: ${{ inputs.input_file }}
+          output-file: ${{ inputs.output_file }}
         run: node ./.github/actions/json-to-csv-action/index.js
 
       - name: Commit and Push CSV
         shell: bash
         env:
          GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
-         OUTPUT_FILE: "data.csv"
+         OUTPUT_FILE:  ${{ inputs.output_file }}
         if: success()
         run: |
           echo "The output file is: $OUTPUT_FILE"
