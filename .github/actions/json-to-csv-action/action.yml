@@ -33,6 +33,9 @@ runs:
 
       - name: Commit and Push CSV
         shell: bash
+         env:
+          GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
+          OUTPUT_FILE: ${{ inputs.output-file }}
         if: success()
         run: |
           echo "The output file is: $OUTPUT_FILE"
@@ -43,9 +46,7 @@ runs:
           git add ${OUTPUT_FILE}
           git commit -m "Add converted CSV file from JSON"
           git push
-        env:
-          GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
-          OUTPUT_FILE: ${{ inputs.output-file }}
+       
                
 
   # Step 3: Run the main script
