@@ -33,9 +33,9 @@ runs:
 
       - name: Commit and Push CSV
         shell: bash
-         env:
-          GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
-          OUTPUT_FILE: ${{ inputs.output-file }}
+        env:
+         GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
+         OUTPUT_FILE: ${{ inputs.output-file }}
         if: success()
         run: |
           echo "The output file is: $OUTPUT_FILE"
