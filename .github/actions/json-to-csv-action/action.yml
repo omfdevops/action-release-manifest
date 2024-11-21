@@ -22,7 +22,7 @@ runs:
       - name: Install dependencies
         shell: bash
         run: npm install
-        working-directory: .github/actions/json-to-csv-action # Adjust this path as needed
+        working-directory: .github/actions/json-to-csv-action 
 
       - name: Run script
         shell: bash
@@ -35,16 +35,17 @@ runs:
         shell: bash
         if: success()
         run: |
-          echo ${{ inputs.output-file }}
+          echo "The output file is: $OUTPUT_FILE"
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
    
           git status
-          git add ${{ inputs.output-file }}
+          git add ${OUTPUT_FILE}
           git commit -m "Add converted CSV file from JSON"
           git push
         env:
           GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
+          OUTPUT_FILE: ${{ inputs.output-file }}
                
 
   # Step 3: Run the main script
