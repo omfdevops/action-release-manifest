@@ -40,8 +40,8 @@ runs:
         run: |
           echo "The output file is: $OUTPUT_FILE"
           cat $OUTPUT_FILE
-          #git config --global user.name "github-actions[bot]"
-          #git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
           realpath $OUTPUT_FILE
           pwd
           git status
