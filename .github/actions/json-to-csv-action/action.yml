@@ -7,6 +7,10 @@ inputs:
   output-file:
     description: "The path where the CSV file will be saved"
     required: true
+  GITHUB_TOKEN:
+    description: "Github token"
+    required: true
+  
 runs:
   using: "composite"
   steps:
