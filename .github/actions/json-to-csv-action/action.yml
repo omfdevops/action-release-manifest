@@ -42,7 +42,7 @@ runs:
           git commit -m "Add converted CSV file from JSON"
           git push
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
                
 
   # Step 3: Run the main script
