@@ -37,7 +37,7 @@ runs:
         run: |
           #git config --global user.name "github-actions[bot]"
           #git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          mv data.csv ./data.csv
+          #mv data.csv ./data.csv
           git status
           git add ./data.csv
           git commit -m "Add converted CSV file from JSON"
