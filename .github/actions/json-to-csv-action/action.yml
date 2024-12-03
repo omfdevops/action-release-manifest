@@ -48,6 +48,7 @@ runs:
       - name: Install NPM Dependencies
         shell: bash
         run: |
+          echo "installing NPM Dependencies"
           echo "NODE_PATH=/opt/node/18/bin" >> $GITHUB_ENV
           export PATH=$PATH:${{ env.NODE_PATH }}
           npm config set registry ${{ inputs.NPM_REGISTRY_URL }}
