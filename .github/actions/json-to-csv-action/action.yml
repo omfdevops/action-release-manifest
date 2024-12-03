@@ -56,7 +56,7 @@ runs:
           npm config set always-auth true
           npm config set cafile '/etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem'
           npm config set email ${{ inputs.NPM_USER_EMAIL }}
-          npm install
+          npm install --loglevel verbose
         working-directory: .github/actions/json-to-csv-action 
 
       #- name: Run script
