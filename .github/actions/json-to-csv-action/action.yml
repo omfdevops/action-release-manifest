@@ -76,7 +76,7 @@ runs:
           #npm config set loglevel verbose
 
           
-          npm install --loglevel verbose
+          #npm install --loglevel verbose
         #working-directory: .github/actions/json-to-csv-action 
         
 
