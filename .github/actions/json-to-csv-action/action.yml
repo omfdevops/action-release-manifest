@@ -26,10 +26,10 @@ inputs:
 runs:
   using: "composite"
   steps:
-      #- name: Set up Node.js
-        #uses: actions/setup-node@v2
-        #with:
-          #node-version: '16'
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
 
       #- name: Authenticate with npm registry
       #  uses: actions/setup-node@v2
@@ -49,7 +49,7 @@ runs:
         shell: bash
         run: |
           echo "NODE_PATH=/opt/node/18/bin" >> $GITHUB_ENV
-          export PATH=$PATH:${{ env.NODE_PATH }}
+          #export PATH=$PATH:${{ env.NODE_PATH }}
           npm config set @omf:registry ${{ inputs.NPM_REGISTRY_URL }}
           npm config set //jfafn.jfrog.io/artifactory/api/npm/entsvc-npm/:_auth ${{ inputs.NPM_AUTH}}
           npm config set cafile '/etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem'
@@ -87,7 +87,7 @@ runs:
           input-file: ${{ inputs.input_file }}
           output-file: ${{ inputs.output_file }}
         run: |
-          export PATH=$PATH:${{ env.NODE_PATH }}
+          #export PATH=$PATH:${{ env.NODE_PATH }}
           node -v 
           node ./.github/actions/json-to-csv-action/index.js
 
