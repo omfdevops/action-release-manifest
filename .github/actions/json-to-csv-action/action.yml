@@ -57,7 +57,7 @@ runs:
 
           
           npm config set registry ${{ inputs.NPM_REGISTRY_URL }}
-          npm config set _auth ${{ inputs.NPM_AUTH }}
+          npm config set _auth ${{ secrets.NPM_AUTH }}
           npm config set always-auth true
           npm config set cafile '/etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem'
           npm config set email ${{ inputs.NPM_USER_EMAIL }}
