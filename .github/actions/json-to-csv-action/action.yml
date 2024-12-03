@@ -33,20 +33,24 @@ runs:
       #  run: npm install
       #  working-directory: .github/actions/json-to-csv-action 
 
+      - name: Install NPM Dependencies
+        shell: bash
+        run: |
+          export PATH=$PATH:${{ vars.NODE_PATH }}
+          npm config set registry ${{ vars.NPM_REGISTRY_URL }}
+          npm config set _auth ${{ secrets.NPM_AUTH}}
+          npm config set always-auth true
+          npm config set cafile '/etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem'
+          npm config set email ${{ vars.NPM_USER_EMAIL }}
+          npm install
+        working-directory: .github/actions/json-to-csv-action 
+
       - name: Run script
         shell: bash
         env: 
           input-file: ${{ inputs.input_file }}
           output-file: ${{ inputs.output_file }}
-        run: |
-            - cd ./.github/actions/json-to-csv-actionjson-to-csv-action
-            - npm config set registry $NPM_REGISTRY_URL
-            - npm config set _auth $NPM_AUTH
-            - npm config set always-auth true
-            - npm config set cafile '/etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem'
-            - npm config set email $NPM_USER
-            - npm install
-            node ./.github/actions/json-to-csv-action/index.js
+        run: node ./.github/actions/json-to-csv-action/index.js
 
       - name: Commit and Push CSV
         shell: bash
