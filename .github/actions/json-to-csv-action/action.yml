@@ -16,7 +16,7 @@ inputs:
   NPM_AUTH:
     description: "npm auth"
     required: true  
-  NPM_USER_EMAIL
+  NPM_USER_EMAIL:
     description: "npm user email"
     required: true 
     
