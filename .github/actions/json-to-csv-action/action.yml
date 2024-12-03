@@ -36,7 +36,8 @@ runs:
       - name: Install NPM Dependencies
         shell: bash
         run: |
-          export PATH=$PATH:${{ vars.NODE_PATH }}
+          echo "NODE_PATH=/opt/node/18/bin" >> $GITHUB_ENV
+          export PATH=$PATH:${{ env.NODE_PATH }}
           npm config set registry ${{ vars.NPM_REGISTRY_URL }}
           npm config set _auth ${{ secrets.NPM_AUTH}}
           npm config set always-auth true
