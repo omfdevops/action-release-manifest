@@ -29,7 +29,7 @@ async function run() {
             version: deployment.version,
             JiraNumber: deployment.issues.map(issue => issue.key).join('; '),
             SourceCodeSystem: "GitHub",
-            ApplicationReleaseID: `${deployment.application}-${deployment.operation.gitHubPullRequest?.pullNumber || ''}`,
+            ApplicationReleaseID: `${deployment.application}-${deployment.operation.gitHubPullRequest && deployment.operation.gitHubPullRequest.pullNumber || ''}`,
             Platform: "MuleSoft"    
             
         }));
