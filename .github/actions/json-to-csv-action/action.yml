@@ -15,7 +15,11 @@ inputs:
     required: true
   NPM_AUTH:
     description: "npm auth"
-    required: true    
+    required: true  
+  NPM_USER_EMAIL
+    description: "npm user email"
+    required: true 
+    
   
   
   
@@ -50,7 +54,7 @@ runs:
           npm config set _auth ${{ inputs.NPM_AUTH}}
           npm config set always-auth true
           npm config set cafile '/etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem'
-          npm config set email ${{ vars.NPM_USER_EMAIL }}
+          npm config set email ${{ inputs.NPM_USER_EMAIL }}
           npm install
         working-directory: .github/actions/json-to-csv-action 
 
