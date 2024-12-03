@@ -88,7 +88,7 @@ runs:
           output-file: ${{ inputs.output_file }}
         run: |
           export PATH=$PATH:${{ env.NODE_PATH }}
-          nove -v 
+          node -v 
           node ./.github/actions/json-to-csv-action/index.js
 
       #- name: Commit and Push CSV
