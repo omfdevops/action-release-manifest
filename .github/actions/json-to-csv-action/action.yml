@@ -19,17 +19,34 @@ runs:
         with:
           node-version: '16'
 
-      - name: Install dependencies
-        shell: bash
-        run: npm install
-        working-directory: .github/actions/json-to-csv-action 
+      #- name: Authenticate with npm registry
+      #  uses: actions/setup-node@v2
+      #  with:
+      #    node-version: '16'
+      #    registry-url: $NPM_REGISTRY_URL
+      #    scope: '@your-scope'
+      #  env:
+      #    NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      #- name: Install dependencies
+      #  shell: bash
+      #  run: npm install
+      #  working-directory: .github/actions/json-to-csv-action 
 
       - name: Run script
         shell: bash
         env: 
           input-file: ${{ inputs.input_file }}
           output-file: ${{ inputs.output_file }}
-        run: node ./.github/actions/json-to-csv-action/index.js
+        run: |
+            - cd ./.github/actions/json-to-csv-actionjson-to-csv-action
+            - npm config set registry $NPM_REGISTRY_URL
+            - npm config set _auth $NPM_AUTH
+            - npm config set always-auth true
+            - npm config set cafile '/etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem'
+            - npm config set email $NPM_USER
+            - npm install
+            node ./.github/actions/json-to-csv-action/index.js
 
       - name: Commit and Push CSV
         shell: bash
