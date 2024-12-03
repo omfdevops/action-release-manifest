@@ -58,30 +58,30 @@ runs:
           npm install
         working-directory: .github/actions/json-to-csv-action 
 
-      - name: Run script
-        shell: bash
-        env: 
-          input-file: ${{ inputs.input_file }}
-          output-file: ${{ inputs.output_file }}
-        run: node ./.github/actions/json-to-csv-action/index.js
+      #- name: Run script
+        #shell: bash
+        #env: 
+          #input-file: ${{ inputs.input_file }}
+          #output-file: ${{ inputs.output_file }}
+        #run: node ./.github/actions/json-to-csv-action/index.js
 
-      - name: Commit and Push CSV
-        shell: bash
-        env:
-         GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
-         OUTPUT_FILE:  ${{ inputs.output_file }}
-        if: success()
-        run: |
-          echo "The output file is: $OUTPUT_FILE"
-          cat $OUTPUT_FILE
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          realpath $OUTPUT_FILE
-          pwd
-          git status
-          git add $OUTPUT_FILE
-          git commit -m "Add converted CSV file from JSON"
-          git push
+      #- name: Commit and Push CSV
+        #shell: bash
+        #env:
+         #GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
+         #OUTPUT_FILE:  ${{ inputs.output_file }}
+        #if: success()
+        #run: |
+          #echo "The output file is: $OUTPUT_FILE"
+          #cat $OUTPUT_FILE
+          #git config --global user.name "github-actions[bot]"
+          #git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          #realpath $OUTPUT_FILE
+          #pwd
+          #git status
+          #git add $OUTPUT_FILE
+          #git commit -m "Add converted CSV file from JSON"
+          #git push
        
                
 
