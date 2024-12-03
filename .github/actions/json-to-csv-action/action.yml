@@ -48,7 +48,7 @@ runs:
       - name: Install NPM Dependencies
         shell: bash
         run: |
-          echo "NODE_PATH=/opt/node/16/bin" >> $GITHUB_ENV
+          echo "NODE_PATH=/opt/node/18/bin" >> $GITHUB_ENV
           export PATH=$PATH:${{ env.NODE_PATH }}
           npm config set @omf:registry ${{ inputs.NPM_REGISTRY_URL }}
           npm config set //jfafn.jfrog.io/artifactory/api/npm/entsvc-npm/:_auth ${{ inputs.NPM_AUTH}}
@@ -86,7 +86,9 @@ runs:
         env: 
           input-file: ${{ inputs.input_file }}
           output-file: ${{ inputs.output_file }}
-        run: node ./.github/actions/json-to-csv-action/index.js
+        run: |
+          export PATH=$PATH:${{ env.NODE_PATH }}
+          node ./.github/actions/json-to-csv-action/index.js
 
       #- name: Commit and Push CSV
         #shell: bash
