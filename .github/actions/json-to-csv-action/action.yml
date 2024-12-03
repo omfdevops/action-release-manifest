@@ -48,7 +48,7 @@ runs:
       - name: Install NPM Dependencies
         shell: bash
         run: |
-          echo "NODE_PATH=/opt/node/18/bin" >> $GITHUB_ENV
+          echo "NODE_PATH=/opt/node/16/bin" >> $GITHUB_ENV
           export PATH=$PATH:${{ env.NODE_PATH }}
           npm config set @omf:registry ${{ inputs.NPM_REGISTRY_URL }}
           npm config set //jfafn.jfrog.io/artifactory/api/npm/entsvc-npm/:_auth ${{ inputs.NPM_AUTH}}
