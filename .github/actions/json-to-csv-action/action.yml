@@ -50,12 +50,12 @@ runs:
         run: |
           echo "installing NPM Dependencies"
 
-         # Set up environment variables
+          
           echo "NODE_PATH=/opt/node/18/bin" >> $GITHUB_ENV
           echo "PATH=$PATH:/opt/node/18/bin" >> $GITHUB_ENV
           source $GITHUB_ENV
 
-        # Configure npm
+          
           npm config set registry ${{ inputs.NPM_REGISTRY_URL }}
           npm config set _auth ${{ inputs.NPM_AUTH }}
           npm config set always-auth true
@@ -63,8 +63,8 @@ runs:
           npm config set email ${{ inputs.NPM_USER_EMAIL }}
           npm config set loglevel verbose
 
-# Install dependencies with verbosity
-npm install --loglevel verbose
+          
+          npm install --loglevel verbose
         working-directory: .github/actions/json-to-csv-action 
 
       #- name: Run script
