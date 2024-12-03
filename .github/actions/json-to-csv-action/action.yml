@@ -81,12 +81,12 @@ runs:
         #working-directory: .github/actions/json-to-csv-action 
         
 
-      #- name: Run script
-        #shell: bash
-        #env: 
-          #input-file: ${{ inputs.input_file }}
-          #output-file: ${{ inputs.output_file }}
-        #run: node ./.github/actions/json-to-csv-action/index.js
+      - name: Run script
+        shell: bash
+        env: 
+          input-file: ${{ inputs.input_file }}
+          output-file: ${{ inputs.output_file }}
+        run: node ./.github/actions/json-to-csv-action/index.js
 
       #- name: Commit and Push CSV
         #shell: bash
