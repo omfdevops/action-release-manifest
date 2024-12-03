@@ -53,7 +53,7 @@ runs:
           npm config set registry ${{ inputs.NPM_REGISTRY_URL }}
           npm config set //jfafn.jfrog.io/artifactory/api/npm/entsvc-npm/:_auth ${{ inputs.NPM_AUTH}}
           npm config set cafile '/etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem'
-          npm config set email ${{ vars.NPM_USER_EMAIL }}
+          npm config set email ${{ inputs.NPM_USER_EMAIL }}
           npm install
           node -v
 
