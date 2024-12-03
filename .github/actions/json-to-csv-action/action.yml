@@ -7,7 +7,7 @@ inputs:
   output_file:
     description: "The path where the CSV file will be saved"
     required: true
-  GITHUB_TOKEN:
+  GH_TOKEN:
     description: "Github token"
     required: true
   NPM_REGISTRY_URL:
@@ -31,6 +31,13 @@ runs:
         #with:
           #node-version: '16'
 
+      - name: action-release-manifest Repository
+        uses: actions/checkout@v4
+        with:
+          repository: omfdevops/action-release-manifest
+          ref: main
+          token: ${{ inputs.GH_TOKEN }}
+          path: action-release-manifest
     
       - name: Install NPM Dependencies
         shell: bash
