@@ -23,22 +23,19 @@ async function run() {
 
 
 
-        const flattenedData = data.deployments.map((deployment) => {
-            const pullNumber = deployment.operation && deployment.operation.gitHubPullRequest ? deployment.operation.gitHubPullRequest.pullNumber : '';
-    
-            console.log(`Deployment: ${deployment.application}, Pull Number: ${pullNumber}`);  // Debug log to check pullNumber
+        // Map data to flatten each deployment entry into a CSV-friendly structure
+        const flattenedData = data.deployments.map((deployment) => ({
+            ReleaseDate: currentDate, 
+            Application: deployment.application,
+            ObjectName: "",
+            version: deployment.version,
+            JiraNumber: deployment.issues.map(issue => issue.key).join('; '),
+            SourceCodeSystem: "GitHub",
+            ApplicationReleaseID: `${deployment.application}-${deployment.operation.gitHubPullRequest?.pullNumber || ''}`,
+            Platform: "MuleSoft"    
+            
+        }));
 
-            return {
-                ReleaseDate: currentDate, 
-                Application: deployment.application,
-                ObjectName: "",
-                version: deployment.version,
-                JiraNumber: deployment.issues.map(issue => issue.key).join('; '),
-                SourceCodeSystem: "GitHub",
-                ApplicationReleaseID: `${deployment.application}-${pullNumber}`,  // Use the pullNumber here
-                Platform: "MuleSoft"
-            };
-        });
 
         console.log(flattenedData);
 
