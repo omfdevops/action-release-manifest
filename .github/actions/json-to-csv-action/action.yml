@@ -51,6 +51,7 @@ runs:
           TOKEN: ${{ steps.generate_repo_token.outputs.token }}
 
       - name: List Repositories for Token
+        shell: bash
         run: |
           curl -H "Authorization: Bearer ${{ steps.generate_repo_token.outputs.token }}" \
                -H "Accept: application/vnd.github+json" \
