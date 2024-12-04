@@ -33,14 +33,7 @@ runs:
         #with:
           #node-version: '16'
 
-      - name: action-release-manifest Repository
-        uses: actions/checkout@v4
-        with:
-          repository: omfdevops/action-release-manifest
-          ref: main
-          token: ${{ inputs.GH_TOKEN }}
-          path: action-release-manifest
-    
+          
       - name: Install NPM Dependencies
         shell: bash
         run: |
