@@ -58,6 +58,7 @@ runs:
           node -v
           pwd
           cd ..
+          cd ..
           ls
           node ./.github/actions/json-to-csv-action/index.js
 
