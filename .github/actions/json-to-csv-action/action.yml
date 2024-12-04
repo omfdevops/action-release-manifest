@@ -44,6 +44,20 @@ runs:
           private-key: ${{ inputs.GA_OMFRLSORCH_APP_PRIVATE_KEY }}
           owner: ${{ matrix.OWNER }}
 
+      - name: Debug Token Creation
+        run: echo "Token Generated Successfully"
+        env:
+          TOKEN: ${{ steps.generate_repo_token.outputs.token }}
+
+
+      - name: action-release-manifest Repository
+        uses: actions/checkout@v4
+        with:
+          repository: omfdevops/action-release-manifest
+          ref: main
+          token: ${{ steps.generate_repo_token.outputs.token }}
+          path: mulesoft-testing/action-release-manifest
+
       - name: action-release-manifest Repository
         uses: actions/checkout@v4
         with:
