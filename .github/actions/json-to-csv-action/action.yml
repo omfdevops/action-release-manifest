@@ -7,9 +7,6 @@ inputs:
   output_file:
     description: "The path where the CSV file will be saved"
     required: true
-  GITHUB_TOKEN:
-    description: "Github token"
-    required: true
   NPM_REGISTRY_URL:
     description: "npm registry url"
     required: true
@@ -20,7 +17,7 @@ inputs:
     description: "npm user email"
     required: true
   GH_TOKEN:
-    description: "token to checkout repo"
+    description: Github token to use for authenticating to github api
     required: true
 
     
