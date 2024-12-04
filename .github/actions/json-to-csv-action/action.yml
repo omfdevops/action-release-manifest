@@ -16,8 +16,11 @@ inputs:
   NPM_USER_EMAIL:
     description: "npm user email"
     required: true
-  GH_TOKEN:
-    description: Github token to use for authenticating to github api
+  GA_OMFRLSORCH_APP_ID:
+    description: "release orch app id"
+    required: true
+  GA_OMFRLSORCH_APP_PRIVATE_KEY:
+    description: "release orch private key"
     required: true
 
     
