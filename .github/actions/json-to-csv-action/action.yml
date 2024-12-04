@@ -93,8 +93,8 @@ runs:
       - name: Run script
         shell: bash
         env: 
-          input-file: ${{ inputs.input_file }}
-          output-file: ${{ inputs.output_file }}
+          INPUT_FILE: ${{ inputs.input_file }}
+          OUTPUT_FILE: ${{ inputs.output_file }}
         run: |
           export PATH=$PATH:${{ env.NODE_PATH }}
           node -v
