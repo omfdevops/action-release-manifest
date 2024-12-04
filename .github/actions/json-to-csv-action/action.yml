@@ -24,18 +24,12 @@ inputs:
     required: true
 
     
-    
-  
-  
+ 
   
 runs:
   using: "composite"
   steps:
-      #- name: Set up Node.js
-        #uses: actions/setup-node@v2
-        #with:
-          #node-version: '16'
-
+      
       - name: Generate Token for org
         id: generate_repo_token
         uses: actions/create-github-app-token@v1
@@ -43,21 +37,6 @@ runs:
           app-id: ${{ inputs.GA_OMFRLSORCH_APP_ID }}
           private-key: ${{ inputs.GA_OMFRLSORCH_APP_PRIVATE_KEY }}
           OWNER: ${{ matrix.OWNER }}
-
-      - name: Debug Token Creation
-        shell: bash
-        run: echo "Token Generated Successfully"
-        env:
-          TOKEN: ${{ steps.generate_repo_token.outputs.token }}
-
-      - name: List Repositories for Token
-        shell: bash
-        run: |
-          echo "List Repositories for Token"
-          curl -H "Authorization: Bearer ${{ steps.generate_repo_token.outputs.token }}" \
-               -H "Accept: application/vnd.github+json" \
-                https://api.github.com/orgs/omfdevops/repos
-
 
       - name: action-release-manifest Repository
         uses: actions/checkout@v4
@@ -67,14 +46,7 @@ runs:
           token: ${{ steps.generate_repo_token.outputs.token }}
           path: action-release-manifest
 
-      - name: action-release-manifest Repository
-        uses: actions/checkout@v4
-        with:
-          repository: omfdevops/action-release-manifest
-          ref: main
-          token: ${{ steps.generate_repo_token.outputs.token }}
-          path: mulesoft-testing/action-release-manifest
-
+      
           
       - name: Install NPM Dependencies
         shell: bash
@@ -102,31 +74,4 @@ runs:
           ls
           node ./action-release-manifest/.github/actions/json-to-csv-action/index.js
 
-      #- name: Commit and Push CSV
-        #shell: bash
-        #env:
-         #GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
-         #OUTPUT_FILE:  ${{ inputs.output_file }}
-        #if: success()
-        #run: |
-          #echo "The output file is: $OUTPUT_FILE"
-          #cat $OUTPUT_FILE
-          #git config --global user.name "github-actions[bot]"
-          #git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          #realpath $OUTPUT_FILE
-          #pwd
-          #git status
-          #git add $OUTPUT_FILE
-          #git commit -m "Add converted CSV file from JSON"
-          #git push
-       
-               
-
-  # Step 3: Run the main script
-    #- name: Run JSON to CSV script
-    #  run: node index.js
-    #  shell: bash
-    #  working-directory: .github/actions/json-to-csv-action # Adjust this path as needed
-    #  with:
-    #    input-file: ${{ inputs.input-file }}
-    #    output-file: ${{ inputs.output-file }}
+      
