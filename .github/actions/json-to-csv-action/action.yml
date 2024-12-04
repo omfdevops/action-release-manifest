@@ -42,7 +42,7 @@ runs:
         with:
           app-id: ${{ inputs.GA_OMFRLSORCH_APP_ID }}
           private-key: ${{ inputs.GA_OMFRLSORCH_APP_PRIVATE_KEY }}
-          owner: omfdevops
+          OWNER: ${{ matrix.OWNER }}
 
       - name: Debug Token Creation
         shell: bash
