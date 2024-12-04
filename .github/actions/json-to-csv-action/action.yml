@@ -40,8 +40,8 @@ runs:
         id: generate_repo_token
         uses: actions/create-github-app-token@v1
         with:
-          app-id: ${{ secrets.GA_OMFRLSORCH_APP_ID }}
-          private-key: ${{ secrets.GA_OMFRLSORCH_APP_PRIVATE_KEY }}
+          app-id: ${{ inputs.GA_OMFRLSORCH_APP_ID }}
+          private-key: ${{ inputs.GA_OMFRLSORCH_APP_PRIVATE_KEY }}
           owner: ${{ matrix.OWNER }}
 
       - name: action-release-manifest Repository
