@@ -100,9 +100,7 @@ runs:
           node -v
           pwd
           ls
-          cd ..
-          ls
-          node ./.github/actions/json-to-csv-action/index.js
+          node ./action-release-manifest/.github/actions/json-to-csv-action/index.js
 
       #- name: Commit and Push CSV
         #shell: bash
