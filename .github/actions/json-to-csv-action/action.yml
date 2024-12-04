@@ -42,13 +42,19 @@ runs:
         with:
           app-id: ${{ inputs.GA_OMFRLSORCH_APP_ID }}
           private-key: ${{ inputs.GA_OMFRLSORCH_APP_PRIVATE_KEY }}
-          owner: ${{ matrix.OWNER }}
+          owner: omfdevops
 
       - name: Debug Token Creation
         shell: bash
         run: echo "Token Generated Successfully"
         env:
           TOKEN: ${{ steps.generate_repo_token.outputs.token }}
+
+      - name: List Repositories for Token
+        run: |
+        curl -H "Authorization: Bearer ${{ steps.generate_repo_token.outputs.token }}" \
+         -H "Accept: application/vnd.github+json" \
+         https://api.github.com/orgs/omfdevops/repos
 
 
       - name: action-release-manifest Repository
@@ -57,7 +63,7 @@ runs:
           repository: omfdevops/action-release-manifest
           ref: main
           token: ${{ steps.generate_repo_token.outputs.token }}
-          path: mulesoft-testing/action-release-manifest
+          path: action-release-manifest
 
       - name: action-release-manifest Repository
         uses: actions/checkout@v4
