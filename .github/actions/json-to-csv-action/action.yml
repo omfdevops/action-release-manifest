@@ -57,8 +57,7 @@ runs:
           export PATH=$PATH:${{ env.NODE_PATH }}
           node -v
           pwd
-          cd ..
-          cd ..
+          cd ./action-release-manifest
           ls
           node ./.github/actions/json-to-csv-action/index.js
 
