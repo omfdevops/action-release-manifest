@@ -33,6 +33,22 @@ runs:
         #with:
           #node-version: '16'
 
+      - name: Generate Token for org
+        id: generate_repo_token
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ secrets.GA_OMFRLSORCH_APP_ID }}
+          private-key: ${{ secrets.GA_OMFRLSORCH_APP_PRIVATE_KEY }}
+          owner: ${{ matrix.OWNER }}
+
+      - name: action-release-manifest Repository
+        uses: actions/checkout@v4
+        with:
+          repository: omfdevops/action-release-manifest
+          ref: main
+          token: ${{ steps.generate_repo_token.outputs.token }}
+          path: mulesoft-testing/action-release-manifest
+
           
       - name: Install NPM Dependencies
         shell: bash
