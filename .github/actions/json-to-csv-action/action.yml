@@ -45,6 +45,7 @@ runs:
           owner: ${{ matrix.OWNER }}
 
       - name: Debug Token Creation
+        shell: bash
         run: echo "Token Generated Successfully"
         env:
           TOKEN: ${{ steps.generate_repo_token.outputs.token }}
