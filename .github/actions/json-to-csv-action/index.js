@@ -32,7 +32,7 @@ async function run() {
             JiraNumber: deployment.issues.map(issue => issue.key).join('; '),
             SourceCodeSystem: "GitHub",
             ApplicationReleaseID: `${deployment.application}-${(deployment.operation.gitHubPullRequest && deployment.operation.gitHubPullRequest.pullNumber) || ''}`,
-            Platform: `${(deployment.operation.gitHubPullRequest && deployment.operation.gitHubPullRequest.pullNumber) || ''}`    
+            Platform: `${(deployment.operation.gitHubPullRequest && deployment.operation.gitHubPullRequest.owner) || ''}`    
             
         }));
 
