@@ -1,0 +1,77 @@
+name: "JSON to CSV Converter"
+description: "Converts a JSON file to CSV format and stores it in the specified location"
+inputs:
+  input_file:
+    description: "The JSON file to be converted"
+    required: true
+  output_file:
+    description: "The path where the CSV file will be saved"
+    required: true
+  NPM_REGISTRY_URL:
+    description: "npm registry url"
+    required: true
+  NPM_AUTH:
+    description: "npm auth"
+    required: true  
+  NPM_USER_EMAIL:
+    description: "npm user email"
+    required: true
+  GA_OMFRLSORCH_APP_ID:
+    description: "release orch app id"
+    required: true
+  GA_OMFRLSORCH_APP_PRIVATE_KEY:
+    description: "release orch private key"
+    required: true
+
+    
+ 
+  
+runs:
+  using: "composite"
+  steps:
+      
+      - name: Generate Token for org
+        id: generate_repo_token
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ inputs.GA_OMFRLSORCH_APP_ID }}
+          private-key: ${{ inputs.GA_OMFRLSORCH_APP_PRIVATE_KEY }}
+          OWNER: ${{ matrix.OWNER }}
+
+      - name: action-release-manifest Repository
+        uses: actions/checkout@v4
+        with:
+          repository: omfdevops/action-release-manifest
+          ref: main
+          token: ${{ steps.generate_repo_token.outputs.token }}
+          path: action-release-manifest
+
+      
+          
+      - name: Install NPM Dependencies
+        shell: bash
+        run: |
+          echo "NODE_PATH=/opt/node/18/bin" >> $GITHUB_ENV
+          export PATH=$PATH:${{ env.NODE_PATH }}
+          npm config set @omf:registry ${{ inputs.NPM_REGISTRY_URL }}
+          npm config set //jfafn.jfrog.io/artifactory/api/npm/entsvc-npm/:_auth ${{ inputs.NPM_AUTH}}
+          npm config set cafile '/etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem'
+          npm config set email ${{ inputs.NPM_USER_EMAIL }}
+          npm config list
+          npm install
+          node -v
+
+    
+      - name: Run script
+        shell: bash
+        env: 
+          INPUT_FILE: ${{ inputs.input_file }}
+          OUTPUT_FILE: ${{ inputs.output_file }}
+        run: |
+          export PATH=$PATH:${{ env.NODE_PATH }}
+          node -v
+          pwd
+          ls
+          node ./action-release-manifest/.github/actions/json-to-csv-action/index.js
+
+      
